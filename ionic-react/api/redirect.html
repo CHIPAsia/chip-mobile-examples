@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+  <head><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></head>
+  <body>
+    <h1>Demo Merchant</h1>
+
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <h2>Sample Redirect Page</h2>
+      <span style="font-size: 17px;">Redirecting back to app...</span>
+    </div>
+  </div>
+  <script>
+    if (window.webkit && window.webkit.messageHandlers) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const success = urlParams.get('success');
+
+      setTimeout(() => {
+        window.webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify({
+          "event": "paymentRedirect",
+          "status": success === "true" ? "success" : "fail",
+        }))
+      }, 2000)
+    }
+  </script>
+  </body>
+</html>
