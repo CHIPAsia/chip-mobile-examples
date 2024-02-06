@@ -7,8 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "run:ios": "ionic capacitor run ios -l --external",
-    "run:android": "ionic capacitor run android -l --external",
+    "check-build": "sh -c 'if [ ! -f ./dist ]; then yarn build; fi'",
+    "run:ios": "yarn check-build && ionic capacitor run ios -l --external",
+    "run:android": "yarn check-build && ionic capacitor run android -l --external",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint"
@@ -58,5 +59,6 @@
     "vite": "^5.0.0",
     "vitest": "^0.34.6"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "license": "MIT"
 }
