@@ -84,3 +84,8 @@ Note: Make sure you have basic knowledge on mobile app development.
     xcrun simctl list
     ```
     if you are not, you need to set up on your XCode.
+3. If you encounter an error like this
+    ```
+    error: unable to open configuration settings file
+    ```
+    please make sure you've installed cocoapods and your **pods** installations are success.
