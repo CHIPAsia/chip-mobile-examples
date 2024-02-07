@@ -28,7 +28,9 @@
 Make sure you have following tools installed:
 1. `yarn` or `npm`
 2. `node` version `>= 18.x.x`
-3. `ionic` version `>= 7.x.x`
+3. `ionic` version `>= 7.x.x`, you can refer to [ionic website](https://ionicframework.com/docs/cli) for installation
+ 
+Note: Make sure you have basic knowledge on mobile app development.
 
 ## Plugins
 1. `cordova-plugin-inappbrowser`
@@ -36,9 +38,11 @@ Make sure you have following tools installed:
 3. `typescript`
 
 ## Run example
-1. Run [api](./api) on your local. 
-    - Follow it's instructions on `readme` to run.
-2. Run ionic server:
+1. Run [api](./api) on your local.
+    - `cd api` to navigate to `api` folder.
+    - Follow its instructions on `readme` to run on your local machine.
+    - This API service needed to be up and running before you run the example app.
+2. Once the API is up and running, then run ionic server:
     ```bash
     yarn dev
     or 
@@ -57,3 +61,26 @@ Make sure you have following tools installed:
     npm run run:android
     ```
 
+## Troubleshoots
+### Android
+1. Make sure your have the emulator installed
+2. If you encounter an error like this
+    ```
+    GET http://localhost:7001/ net::ERR_CONNECTION_REFUSED
+    ```
+    you need to run to forward the port to the host machine (which is your local machine):
+    ```
+    adb reverse tcp:7001 tcp:7001
+    ```
+
+### iOS
+1. Make sure your have installed XCode, cocoapods.
+2. If you encounter an error like this
+    ```
+    [ERROR] No devices or emulators found
+    ```
+    make sure when you run this command, you received list of simulators that available:
+    ```
+    xcrun simctl list
+    ```
+    if you are not, you need to set up on your XCode.

@@ -7,9 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "check-build": "sh -c 'if [ ! -f ./dist ]; then yarn build; fi'",
-    "run:ios": "yarn check-build && ionic capacitor run ios -l --external",
-    "run:android": "yarn check-build && ionic capacitor run android -l --external",
+    "check-build": "sh -c 'if [ ! -f ./dist ]; then npm run build; fi'",
+    "run:ios": "npm run check-build && ionic capacitor run ios -l --external",
+    "run:android": "npm run check-build && ionic capacitor run android -l --external",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint"
@@ -17,6 +17,7 @@
   "dependencies": {
     "@awesome-cordova-plugins/core": "^6.6.0",
     "@awesome-cordova-plugins/in-app-browser": "^6.6.0",
+    "@capacitor/android": "5.6.0",
     "@capacitor/app": "5.0.7",
     "@capacitor/app-launcher": "^5.0.7",
     "@capacitor/browser": "^5.2.0",
