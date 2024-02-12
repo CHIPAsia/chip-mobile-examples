@@ -6,20 +6,19 @@ import {
   IonToolbar,
 } from '@ionic/react'
 import HomeContainer from '../components/HomeContainer'
-import './Home.css'
 
 const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Checkout</IonTitle>
+          <IonTitle>Product List</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse='condense'>
           <IonToolbar>
-            <IonTitle size='large'>Checkout</IonTitle>
+            <IonTitle size='large'>Product List</IonTitle>
           </IonToolbar>
         </IonHeader>
         <HomeContainer />

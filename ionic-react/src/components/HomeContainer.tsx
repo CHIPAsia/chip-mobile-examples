@@ -1,4 +1,3 @@
-import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser'
 import {
   IonButton,
   IonCard,
@@ -9,71 +8,49 @@ import {
 } from '@ionic/react'
 import { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { PaymentGateway } from '../types/PaymentGateway'
 import './HomeContainer.css'
 
 interface ContainerProps {}
 
+const products = [
+  {
+    price: 5500,
+    name: 'Product Title',
+    subtitle: 'Product Subtitle',
+    image: 'https://ionicframework.com/docs/img/demos/card-media.png',
+  },
+]
+
 const HomeContainer: React.FC<ContainerProps> = () => {
   const history = useHistory()
-  const pgInstance = new PaymentGateway()
 
-  /**
-   * Set to false to process the postMessage from redirect webpage.
-   * Check on file ./api/redirect.html on <script /> section
-   * for its postMessage script
-  **/
-  const processInjectScript = true
-
-  const handleCheckout = useCallback(async () => {
-    const res = await pgInstance.createPurchase().then(res => res)
-    const ref = InAppBrowser.create(res.checkout_url, '_blank')
-
-    ref.on('loadstop').subscribe(param => {
-      const { url } = param
-      if (url.startsWith(PaymentGateway.redirectUrl)) {
-        ref.executeScript({ code: `
-            var urlParams = new URLSearchParams(window.location.search);
-            var success = urlParams.get('success');
-      
-            setTimeout(() => {
-              webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify({
-                "event": "paymentRedirect",
-                "status": success === "true" ? "success" : "fail",
-                "source": "app",
-              }));
-            }, 2000)
-          `})
-      }
-    })
-
-    ref.on('message').subscribe((event: any) => {
-      const { data } = event
-      if ((processInjectScript && data.source !== 'app') || (!processInjectScript && data.source === 'app')) return
-
-      ref.close()
-      history.push(`/redirect?status=${event.data.status}`)
-    })
-  }, [])
-
+  const handleClick = useCallback(
+    (data: { price: number; name: string; image: string }) => {
+      history.push(`/checkout`, {
+        data: data,
+      })
+    },
+    [],
+  )
 
   return (
     <>
-      <IonCard>
-        <img
-          alt='Silhouette of mountains'
-          src='https://ionicframework.com/docs/img/demos/card-media.png'
-        />
-        <IonCardHeader>
-          <IonCardTitle>Product Title</IonCardTitle>
-          <IonCardSubtitle>Product Subtitle</IonCardSubtitle>
-        </IonCardHeader>
+      {products.map((x, i) => {
+        return (
+          <IonCard key={`products-${i}`}>
+            <img alt={x.name} src={x.image} />
+            <IonCardHeader>
+              <IonCardTitle>{x.name}</IonCardTitle>
+              <IonCardSubtitle>{x.subtitle}</IonCardSubtitle>
+            </IonCardHeader>
 
-        <IonCardContent>{'Price: RM 55.00'}</IonCardContent>
-        <IonButton onClick={handleCheckout} fill='clear'>
-          {'Buy now'}
-        </IonButton>
-      </IonCard>
+            <IonCardContent>{`Price: RM ${x.price / 100}`}</IonCardContent>
+            <IonButton onClick={() => handleClick(x)} fill='clear'>
+              {'Buy now'}
+            </IonButton>
+          </IonCard>
+        )
+      })}
     </>
   )
 }

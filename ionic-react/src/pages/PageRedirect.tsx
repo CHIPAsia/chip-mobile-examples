@@ -26,7 +26,7 @@ const PageRedirect: React.FC = () => {
   const status = query.get('status')
 
   const handleBack = () => {
-    history.goBack()
+    history.replace('/home')
   }
 
   return (

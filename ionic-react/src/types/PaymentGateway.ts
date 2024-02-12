@@ -12,11 +12,22 @@ export class PaymentGateway {
     })
   }
 
-  async createPurchase() {
+  async createPurchase(data: {
+    client: {
+      email: string
+      name: string
+      phone: string
+    }
+    product: {
+      name: string
+      price: number
+    }
+  }) {
     return await this._axios
       .request({
-        method: 'GET',
+        method: 'POST',
         url: `/create_purchase`,
+        data: data,
       })
       .then(res => res.data)
   }
