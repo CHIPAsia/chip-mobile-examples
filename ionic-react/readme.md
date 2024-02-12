@@ -42,13 +42,7 @@ Note: Make sure you have basic knowledge on mobile app development.
     - `cd api` to navigate to `api` folder.
     - Follow its instructions on `readme` to run on your local machine.
     - This API service needed to be up and running before you run the example app.
-2. Once the API is up and running, then run ionic server:
-    ```bash
-    yarn dev
-    or 
-    npm run dev
-    ``` 
-3. Run on simulator/device:
+2. Run on simulator/device:
     ```bash
     // iOS:
     yarn run:ios
@@ -84,7 +78,11 @@ Note: Make sure you have basic knowledge on mobile app development.
     xcrun simctl list
     ```
     if you are not, you need to set up on your XCode.
-3. If you encounter an error like this
+3.  If you encounter an error like this, open your XCode to update your iOS simulator
+    ```
+    CoreSimulator is out of date.
+    ```
+4. If you encounter an error like this
     ```
     error: unable to open configuration settings file
     ```

@@ -65,9 +65,10 @@ app.get('/api/payment_methods', async (req, res) => {
   )
 })
 
-app.get('/api/create_purchase', async (req, res) => {
-  const client = { email: 'test@test.com' }
-  const product = { name: 'Test', price: 5500 }
+app.post('/api/create_purchase', async (req, res) => {
+  const body = JSON.parse(req.rawBody)
+  const client = body.client
+  const product = body.product
   const details = { products: [product] }
   const purchase = {
     brand_id: brandId,
@@ -75,11 +76,11 @@ app.get('/api/create_purchase', async (req, res) => {
     purchase: details,
     success_redirect: `${basedUrl}/redirect?success=true`,
     failure_redirect: `${basedUrl}/redirect?success=false`,
-    /** 
+    /**
      * Uncomment this line if you want to test callback,
      * baseUrl need to change to your
-     * */ 
-    // success_callback: `${basedUrl}/api/callback`, 
+     * */
+    // success_callback: `${basedUrl}/api/callback`,
   }
 
   apiInstance.purchasesCreate(

@@ -7,6 +7,9 @@ import { IonReactRouter } from '@ionic/react-router'
 import { Redirect, Route } from 'react-router-dom'
 
 /* Pages */
+import Checkout from './pages/Checkout'
+import Home from './pages/Home'
+import PageRedirect from './pages/PageRedirect'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
@@ -25,8 +28,6 @@ import '@ionic/react/css/text-alignment.css'
 import '@ionic/react/css/text-transformation.css'
 
 /* Theme variables */
-import Home from './pages/Home'
-import PageRedirect from './pages/PageRedirect'
 import './theme/variables.css'
 
 setupIonicReact()
@@ -41,6 +42,9 @@ const App: React.FC = () => {
           </Route>
           <Route exact path='/redirect'>
             <PageRedirect />
+          </Route>
+          <Route exact path='/checkout'>
+            <Checkout />
           </Route>
           <Route exact path='/'>
             <Redirect to='/home' />
